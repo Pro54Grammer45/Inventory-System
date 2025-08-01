@@ -13,7 +13,19 @@ const Sidebar = () => {
             href: '/inventory-dashboard/inventory',
         },
         {
-            title: 'Item Groups',
+            title: 'Categories',
+            href: '/inventory-dashboard/inventory',
+        },
+        {
+            title: 'Brands',
+            href: '/inventory-dashboard/inventory',
+        },
+        {
+            title: 'Units',
+            href: '/inventory-dashboard/inventory',
+        },
+        {
+            title: 'Warehouse',
             href: '/inventory-dashboard/inventory',
         },
         {
@@ -72,7 +84,7 @@ const Sidebar = () => {
             </Link>
             {/* Links */}
             <nav className='flex flex-col gap-1 px-3 py-6'>
-                <Link href='#' className='flex items-center space-x-2 bg-blue-600 text-slate-50 p-2 rounded-md'>
+                <Link href='/inventory-dashboard/home/dashboard' className='flex items-center space-x-2 bg-blue-600 text-slate-50 p-2 rounded-md'>
                     <Home className='w-4 h-4'/>
                     <span>Home</span>
                 </Link>
