@@ -9,7 +9,7 @@ const OptionCard = ({optionData}) => {
     <div className="bg-white shadow-md flex flex-col items-center justify-center gap-4 p-6 rounded">
           <h2 className='text-xl font-semibold'>{title}</h2>
           <div>
-            <Icon strokeWidth="0.5px" className='w-36 h-36'/>
+            <Icon strokeWidth="0.5px" className='w-32 h-32'/>
           </div>
           <p className="line-clamp-1">
             {description}

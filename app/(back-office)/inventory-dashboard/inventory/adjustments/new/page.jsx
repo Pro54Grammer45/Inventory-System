@@ -1,99 +1,68 @@
 "use client"
+import AddInventoryForm from '@/components/dashboard/AddInventoryForm'
 import FormHeader from '@/components/dashboard/FormHeader'
-import SelectInput from '@/components/FormInputs/SelectInput'
-import SubmitButton from '@/components/FormInputs/SubmitButton'
-import TextareaInput from '@/components/FormInputs/TextareaInput'
-import TextInput from '@/components/FormInputs/TextInput'
+import TransferInventoryForm from '@/components/dashboard/TransferInventoryForm'
+import { Minus, Plus } from 'lucide-react'
+
 import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
+
 
 const NewAdjustment = () => {
-  const branches = [
+  const tabs = [
     {
-      label: "Branch A",
-      value: "masvcasdvcmba1112sasc"
+      title: "Add Stock",
+      icon: Plus,
+      form: "add"
     },
     {
-      label: "Branch B",
-      value: "vdhfvdshvchd112121sacasc"
-    },
-    {
-      label: "Branch C",
-      value: "asncbasb15212sacasc"
-    },
-]
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm()
-
-  const [loading, setLoading] = useState(false)
-
-  async function onSubmit(data) {
-    console.log(data)
-    setLoading(true)
-    const baseUrl = "http://localhost:3000"
-    try {
-      const response = await fetch(`${baseUrl}/api/adjustments`,{
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-
-      if(response.ok){
-        console.log(response)
-        setLoading(false)
-        reset()
-      }
-    } catch (error) {
-      setLoading(false)
-      console.log(error)
+      title:"Transfer Stock",
+      icon: Minus,
+      form: "transfer"
     }
-  }
+  ]
+
+  const [activeForm, setActiveForm] = useState("add")
+
   return (
     <div>
       {/* Header */}
       <FormHeader title='New Adjustment' href='/inventory-dashboard/inventory'/>
       {/* Form */}
-      <form 
-        onSubmit={handleSubmit(onSubmit)}
-        className='w-full max-w-4xl my-3 mx-auto p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700'
-      >
-        <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-            <TextInput 
-                label='Enter amount of stock to transfer' 
-                name='transferStockQty' 
-                register={register} 
-                errors={errors}
-                type='number'
-                className='w-full'
-            />
-            <SelectInput
-                label='Select the branch to receive the stock'
-                name='receivingBranchId'     
-                register={register}
-                className='w-full'
-                options={branches}
-            />
-            <TextareaInput
-                label='Adjustment Notes'
-                name='notes'
-                register={register}
-                errors={errors}  
-            />
-        </div>
-        {/* Submit Button */}
-        <div className="sm:col-span-1">
-            <SubmitButton isLoading={loading} title='Adjustment'/>
-        </div>
-      </form>
+
+      
+
+      <div className="border-b border-gray-200 dark:border-gray-700 w-full max-w-4xl px-4 py-2 my-4 mx-auto bg-white border dark:bg-gray-800 shadow rounded">
+          <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+              {
+                tabs.map((tab,i)=>{
+                  const Icon = tab.icon;
+                  return (
+                    <li key={i} className="me-2">
+                      <button 
+                        onClick={()=>setActiveForm(tab.form)}
+                        className={`${activeForm===tab.form ? "inline-flex items-center justify-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group"
+                          :
+                        "inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300"}`}
+                      >
+                        <Icon className={`${activeForm===tab.form ? "w-4 h-4 me-2 text-blue-600 group-hover:text-blue-600" : "w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500"}`}/>
+                        {tab.title}
+                      </button>
+                    </li>
+                  )
+                })
+              }
+            </ul>
+      </div>
+
+      { activeForm==="add" ? (
+        <AddInventoryForm/>
+      ):(
+        <TransferInventoryForm/>
+      )}
+
+      
+      
     </div>
   )
 }
-
 export default NewAdjustment
