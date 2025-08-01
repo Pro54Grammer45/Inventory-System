@@ -47,6 +47,14 @@ const Inventory = () => {
       enabled: true,
       icon: Component,
     },
+    {
+      title: 'Inventory Adjustments',
+      description: 'Transfer stock from Main warehouse',
+      link: '/inventory-dashboard/inventory/adjustments/new',
+      linkTitle: 'New Adjustment',
+      enabled: true,
+      icon: Component,
+    },
   ]
 
   return (

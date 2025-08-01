@@ -7,15 +7,19 @@ import TextInput from '@/components/FormInputs/TextInput'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-const NewWarehouse = () => {
-  const selectOptions = [
+const NewAdjustment = () => {
+  const branches = [
     {
-      label: "Main",
-      value: "main"
+      label: "Branch A",
+      value: "masvcasdvcmba1112sasc"
     },
     {
-      label: "Branch",
-      value: "branch"
+      label: "Branch B",
+      value: "vdhfvdshvchd112121sacasc"
+    },
+    {
+      label: "Branch C",
+      value: "asncbasb15212sacasc"
     },
 ]
 
@@ -33,7 +37,7 @@ const NewWarehouse = () => {
     setLoading(true)
     const baseUrl = "http://localhost:3000"
     try {
-      const response = await fetch(`${baseUrl}/api/warehouse`,{
+      const response = await fetch(`${baseUrl}/api/adjustments`,{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,47 +58,42 @@ const NewWarehouse = () => {
   return (
     <div>
       {/* Header */}
-      <FormHeader title='New Warehouse' href='/inventory-dashboard/inventory'/>
+      <FormHeader title='New Adjustment' href='/inventory-dashboard/inventory'/>
       {/* Form */}
       <form 
         onSubmit={handleSubmit(onSubmit)}
         className='w-full max-w-4xl my-3 mx-auto p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700'
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-          <SelectInput
-            label='Select the Warehouse Type'
-            name='type'     
-            register={register}
-            className='w-full'
-            options={selectOptions}
-          />
-          <TextInput 
-            label='Warehouse Title' 
-            name='title' 
-            register={register} 
-            errors={errors}
-            className='w-full'
-          />
-          <TextInput 
-            label='Warehouse Location' 
-            name='location' 
-            register={register} 
-            errors={errors}
-          />
-          <TextareaInput
-            label='Warehouse Description'
-            name='description'
-            register={register}
-            errors={errors}  
-          />
+            <TextInput 
+                label='Enter amount of stock to transfer' 
+                name='transferStockQty' 
+                register={register} 
+                errors={errors}
+                type='number'
+                className='w-full'
+            />
+            <SelectInput
+                label='Select the branch to receive the stock'
+                name='receivingBranchId'     
+                register={register}
+                className='w-full'
+                options={branches}
+            />
+            <TextareaInput
+                label='Adjustment Notes'
+                name='notes'
+                register={register}
+                errors={errors}  
+            />
         </div>
         {/* Submit Button */}
         <div className="sm:col-span-1">
-          <SubmitButton isLoading={loading} title='Warehouse'/>
+            <SubmitButton isLoading={loading} title='Adjustment'/>
         </div>
       </form>
     </div>
   )
 }
 
-export default NewWarehouse
+export default NewAdjustment
