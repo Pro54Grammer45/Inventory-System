@@ -68,6 +68,13 @@ const TransferInventoryForm = () => {
         className='w-full max-w-4xl p-4 my-3 mx-auto bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700'
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+          <TextInput 
+                label='Reference Number' 
+                name='referenceNumber' 
+                register={register} 
+                errors={errors}
+                type='number'
+            />
             <TextInput 
                 label='Enter quantity of stock to transfer' 
                 name='transferStockQty' 

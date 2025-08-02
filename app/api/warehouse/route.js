@@ -1,10 +1,18 @@
+import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
     try {
         const { title, location, description, type } = await request.json();
 
-        const warehouse = { title, location, description, type };
+        const warehouse = await db.warehouse.create({
+            data: { 
+                name: title,
+                location,
+                description,
+                warehouseType: type,
+            }
+        });
         console.log(warehouse);
         
         return NextResponse.json(warehouse)

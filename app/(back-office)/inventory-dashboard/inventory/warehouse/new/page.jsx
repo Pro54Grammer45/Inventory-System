@@ -6,6 +6,7 @@ import TextareaInput from '@/components/FormInputs/TextareaInput'
 import TextInput from '@/components/FormInputs/TextInput'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 
 const NewWarehouse = () => {
   const selectOptions = [
@@ -44,6 +45,7 @@ const NewWarehouse = () => {
       if(response.ok){
         console.log(response)
         setLoading(false)
+        toast.success('New Unit created successfully!')
         reset()
       }
     } catch (error) {
