@@ -27,3 +27,23 @@ export async function POST(request) {
         })
     }
 }
+
+export async function GET(request) {
+    try {
+        const warehouse = await db.warehouse.findMany({
+            orderBy: {
+                createdAt: 'desc' //Latest Warehouse
+            },
+        })
+        return NextResponse.json(warehouse)
+    } catch (error) {
+        console.log(error);
+        
+        return NextResponse.json({
+            error,
+            message: "Failed to fetch the warehouse"
+        },{
+            status: 500
+        })
+    }
+}

@@ -37,7 +37,7 @@ const NewCategories = () => {
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput 
             label='Category Title' 
-            name='title' 
+            name='name' 
             register={register} 
             errors={errors}
           />
