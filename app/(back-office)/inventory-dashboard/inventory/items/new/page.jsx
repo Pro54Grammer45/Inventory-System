@@ -5,6 +5,7 @@ import SelectInput from '@/components/FormInputs/SelectInput'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextareaInput from '@/components/FormInputs/TextareaInput'
 import TextInput from '@/components/FormInputs/TextInput'
+import { makePostRequest } from '@/lib/apiRequest'
 import { UploadButton, UploadDropzone } from '@/lib/uploadthing'
 import { Pencil } from 'lucide-react'
 import Image from 'next/image'
@@ -89,27 +90,10 @@ const suppliers = [
   async function onSubmit(data) {
     data.imageUrl = imageUrl
     console.log(data)
-    setLoading(true)
-    const baseUrl = "http://localhost:3000"
-    try {
-      const response = await fetch(`${baseUrl}/api/items`,{
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-
-      if(response.ok){
-        console.log(response)
-        setLoading(false)
-        setImageUrl("")
-        reset()
-      }
-    } catch (error) {
-      setLoading(false)
-      console.log(error)
-    }
+    const endpoint = 'api/items'
+    const resourceName = 'Item'
+        
+    makePostRequest({setLoading,endpoint,data,resourceName,reset});
   }
   return (
     <div>

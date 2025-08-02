@@ -31,6 +31,10 @@ const Sidebar = () => {
         {
             title: 'Inventory Adjustments',
             href: '/inventory-dashboard/inventory',
+        },
+        {
+            title: 'Supplier',
+            href: '/inventory-dashboard/inventory',
         }
     ]
 

@@ -1,7 +1,7 @@
 "use client"
 import FixedHeader from '@/components/dashboard/FixedHeader'
 import OptionCard from '@/components/dashboard/OptionCard'
-import {  Diff, LayoutGrid, LayoutPanelTop,  Scale, Slack, Warehouse } from 'lucide-react'
+import {  Diff, Factory, LayoutGrid, LayoutPanelTop,  Scale, Slack, Warehouse } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -48,6 +48,14 @@ const Inventory = () => {
       icon: Scale,
     },
     {
+      title: 'Supplier',
+      description: 'Transfer stock from Main warehouse',
+      link: '/inventory-dashboard/inventory/supplier/new',
+      linkTitle: 'New Supplier',
+      enabled: true,
+      icon: Factory,
+    },
+    {
       title: 'Inventory Adjustments',
       description: 'Transfer stock from Main warehouse',
       link: '/inventory-dashboard/inventory/adjustments/new',
@@ -55,6 +63,7 @@ const Inventory = () => {
       enabled: true,
       icon: Diff,
     },
+    
   ]
 
   return (

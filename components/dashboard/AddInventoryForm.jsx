@@ -3,6 +3,7 @@ import SelectInput from '@/components/FormInputs/SelectInput'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextareaInput from '@/components/FormInputs/TextareaInput'
 import TextInput from '@/components/FormInputs/TextInput'
+import { makePostRequest } from '@/lib/apiRequest'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -10,25 +11,48 @@ const AddInventoryForm = () => {
   const branches = [
     {
       label: "Branch A",
-      value: "masvcasdvcmba1112sasc"
+      value: "masvcasdvwewew1112sasc"
     },
     {
       label: "Branch B",
-      value: "vdhfvdshvchd112121sacasc"
+      value: "vdhfvdshvchd8888sacasc"
     },
     {
       label: "Branch C",
-      value: "asncbasb15212sacasc"
+      value: "asncbeeeee2sacasc"
     },
     {
       label: "Main A",
-      value: "asnkdsvnjasb15212sacasc"
+      value: "asnkdwwwwwwwsb15212sacasc"
     },
     {
       label: "Main B",
+      value: "tttttttttttg776712sacasc"
+    },
+  ]
+
+  const items = [
+    {
+      label: "Item A",
+      value: "masvcasdvcmba1112sasc"
+    },
+    {
+      label: "Item B",
+      value: "vdhfvdshvchd112121sacasc"
+    },
+    {
+      label: "Item C",
+      value: "asncbasb15212sacasc"
+    },
+    {
+      label: "Item D",
+      value: "asnkdsvnjasb15212sacasc"
+    },
+    {
+      label: "Item E",
       value: "asncbajsdhdg776712sacasc"
     },
-]
+  ]
 
   const {
     register,
@@ -41,26 +65,10 @@ const AddInventoryForm = () => {
 
   async function onSubmit(data) {
     console.log(data)
-    setLoading(true)
-    const baseUrl = "http://localhost:3000"
-    try {
-      const response = await fetch(`${baseUrl}/api/adjustments/add`,{
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-
-      if(response.ok){
-        console.log(response)
-        setLoading(false)
-        reset()
-      }
-    } catch (error) {
-      setLoading(false)
-      console.log(error)
-    }
+    const endpoint = 'api/adjustments/add'
+    const resourceName = 'Add Adjustment'
+        
+    makePostRequest({setLoading,endpoint,data,resourceName,reset});
   }
   return (
     <form 
@@ -74,6 +82,14 @@ const AddInventoryForm = () => {
                 register={register} 
                 errors={errors}
                 type='number'
+                className='w-full'
+            />
+            <SelectInput
+                label='Select the Item'
+                name='itemId'     
+                register={register}
+                className='w-full'
+                options={items}
             />
             <TextInput 
                 label='Enter quantity of stock to add' 
@@ -85,7 +101,7 @@ const AddInventoryForm = () => {
             />
             <SelectInput
                 label='Select the Warehouse to receive the stock'
-                name='warehouseId'     
+                name='receivingWarehouseId'     
                 register={register}
                 className='w-full'
                 options={branches}

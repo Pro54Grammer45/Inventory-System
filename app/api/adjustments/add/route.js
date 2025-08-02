@@ -3,14 +3,15 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
     try {
-        const { addStockQty, warehouseId, notes, referenceNumber } = await request.json();
+        const { referenceNumber, itemId, addStockQty, receivingWarehouseId, notes} = await request.json();
 
-        const adjustment = await db.addstockadjustment.create({
+        const adjustment = await db.addStockAdjustment.create({
             data: { 
-                name: title,
-                location,
-                description,
-                warehouseType: type,
+                referenceNumber,
+                itemId,
+                addStockQty: parseInt(addStockQty),
+                receivingWarehouseId,
+                notes,
             }
         });
         console.log(adjustment);

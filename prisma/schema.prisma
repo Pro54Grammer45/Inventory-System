@@ -15,28 +15,31 @@ datasource db {
 }
 
 model Item {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  name         String
-  description  String?
-  category     Category @relation(fields: [categoryId], references: [id])
-  categoryId   String   @db.ObjectId
-  sku          String   @unique
-  barcode      String?
-  quantity     Int
-  unit         Unit     @relation(fields: [unitId], references: [id])
-  unitId       String   @db.ObjectId
-  brand        Brand    @relation(fields: [brandId], references: [id])
-  brandId      String   @db.ObjectId
-  sellingPrice Float
-  buyingPrice  Float
-  supplier     String
-  reOrderPoint Int
-  location     String?
-  imageUrl     String
-  weight       Float?
-  dimensions   String?
-  taxRate      Float
-  notes        String?
+  id                      String                    @id @default(auto()) @map("_id") @db.ObjectId
+  name                    String
+  description             String?
+  category                Category                  @relation(fields: [categoryId], references: [id])
+  categoryId              String                    @db.ObjectId
+  sku                     String                    @unique
+  barcode                 String?
+  quantity                Int
+  unit                    Unit                      @relation(fields: [unitId], references: [id])
+  unitId                  String                    @db.ObjectId
+  brand                   Brand                     @relation(fields: [brandId], references: [id])
+  brandId                 String                    @db.ObjectId
+  sellingPrice            Float
+  buyingPrice             Float
+  supplier                Supplier                  @relation(fields: [supplierId], references: [id])
+  supplierId              String                    @db.ObjectId
+  reOrderPoint            Int
+  location                String?
+  imageUrl                String
+  weight                  Float?
+  dimensions              String?
+  taxRate                 Float
+  notes                   String?
+  AddStockAdjustment      AddStockAdjustment[]
+  TransferStockAdjustment TransferStockAdjustment[]
 }
 
 model Category {
@@ -65,18 +68,16 @@ model Warehouse {
   location                String?
   description             String?
   warehouseType           String
-  AddStockAdjustment      AddStockAdjustment[]
-  givingStockTransfers    TransferStockAdjustment[] @relation(name: "GivingWarehouse")
-  receivingStockTransfers TransferStockAdjustment[] @relation(name: "ReceivingWarehouse")
 }
 
 model AddStockAdjustment {
-  id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  referenceNumber String
-  addStockQty     Int
-  notes           String?
-  warehouse       Warehouse @relation(fields: [warehouseId], references: [id])
-  warehouseId     String    @db.ObjectId
+  id                   String    @id @default(auto()) @map("_id") @db.ObjectId
+  referenceNumber      String
+  addStockQty          Int
+  notes                String?
+  receivingWarehouseId String
+  item                 Item      @relation(fields: [itemId], references: [id])
+  itemId               String    @db.ObjectId
 }
 
 model TransferStockAdjustment {
@@ -84,8 +85,22 @@ model TransferStockAdjustment {
   referenceNumber      String
   transferStockQty     Int
   notes                String?
-  givingWarehouse      Warehouse @relation(name: "GivingWarehouse", fields: [givingWarehouseId], references: [id])
-  givingWarehouseId    String    @db.ObjectId
-  receivingWarehouse   Warehouse @relation(name: "ReceivingWarehouse", fields: [receivingWarehouseId], references: [id])
-  receivingWarehouseId String    @db.ObjectId
+  givingWarehouseId    String    
+  receivingWarehouseId String    
+  item                 Item      @relation(fields: [itemId], references: [id])
+  itemId               String    @db.ObjectId
+}
+
+model Supplier {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  phone         String?
+  email         String?
+  address       String?
+  contactPerson String?
+  supplierCode  String  @unique
+  paymentTerms  String?
+  taxID         String?
+  notes         String?
+  Item          Item[]
 }
