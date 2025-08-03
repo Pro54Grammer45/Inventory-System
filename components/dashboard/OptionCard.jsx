@@ -3,7 +3,7 @@ import { Shirt } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-const OptionCard = ({optionData}) => {
+export default function OptionCard ({optionData}) {
     const {title, description, link, linkTitle, enabled, icon:Icon} = optionData;
   return (
     <div className="bg-white shadow-md flex flex-col items-center justify-center gap-4 p-6 rounded">
@@ -29,4 +29,3 @@ const OptionCard = ({optionData}) => {
   )
 }
 
-export default OptionCard

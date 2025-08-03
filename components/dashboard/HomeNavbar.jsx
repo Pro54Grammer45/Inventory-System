@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
-const HomeNavbar = () => {
+export default function HomeNavbar () {
     const pathname = usePathname();
     console.log(pathname); 
     const navLinks = [
@@ -48,5 +48,3 @@ const HomeNavbar = () => {
     </div>
   )
 }
-
-export default HomeNavbar

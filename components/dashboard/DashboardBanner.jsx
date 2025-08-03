@@ -2,7 +2,7 @@
 import { CreditCard, X } from 'lucide-react'
 import React,{useState} from 'react'
 
-const DashboardBanner = () => {
+export default function DashboardBanner () {
     const [hidden, setHidden] = useState(false);
   return (
     <div className={`${hidden ? 'hidden' : 'grid grid-cols-12 items-center py-6 px-16 bg-white gap-4 relative'}`}>
@@ -27,4 +27,3 @@ const DashboardBanner = () => {
   )
 }
 
-export default DashboardBanner

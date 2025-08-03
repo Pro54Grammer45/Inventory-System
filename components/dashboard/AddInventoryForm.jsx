@@ -7,52 +7,8 @@ import { makePostRequest } from '@/lib/apiRequest'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-const AddInventoryForm = () => {
-  const branches = [
-    {
-      label: "Branch A",
-      value: "masvcasdvwewew1112sasc"
-    },
-    {
-      label: "Branch B",
-      value: "vdhfvdshvchd8888sacasc"
-    },
-    {
-      label: "Branch C",
-      value: "asncbeeeee2sacasc"
-    },
-    {
-      label: "Main A",
-      value: "asnkdwwwwwwwsb15212sacasc"
-    },
-    {
-      label: "Main B",
-      value: "tttttttttttg776712sacasc"
-    },
-  ]
+export default function AddInventoryForm ({items, warehouses}) {
 
-  const items = [
-    {
-      label: "Item A",
-      value: "masvcasdvcmba1112sasc"
-    },
-    {
-      label: "Item B",
-      value: "vdhfvdshvchd112121sacasc"
-    },
-    {
-      label: "Item C",
-      value: "asncbasb15212sacasc"
-    },
-    {
-      label: "Item D",
-      value: "asnkdsvnjasb15212sacasc"
-    },
-    {
-      label: "Item E",
-      value: "asncbajsdhdg776712sacasc"
-    },
-  ]
 
   const {
     register,
@@ -81,7 +37,7 @@ const AddInventoryForm = () => {
                 name='referenceNumber' 
                 register={register} 
                 errors={errors}
-                type='number'
+                type='string'
                 className='w-full'
             />
             <SelectInput
@@ -104,7 +60,7 @@ const AddInventoryForm = () => {
                 name='receivingWarehouseId'     
                 register={register}
                 className='w-full'
-                options={branches}
+                options={warehouses}
             />
             <TextareaInput
                 label='Adjustment Notes'
@@ -121,4 +77,3 @@ const AddInventoryForm = () => {
   )
 }
 
-export default AddInventoryForm

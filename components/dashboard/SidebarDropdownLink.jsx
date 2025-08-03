@@ -9,7 +9,7 @@ import CollapsibleLink from './CollapsibleLink'
 import { ChevronRight } from 'lucide-react'
 
 
-const SidebarDropdownLink = ({title,items,icon:Icon}) => {
+export default function SidebarDropdownLink  ({title,items,icon:Icon})  {
     
   return (
     <Collapsible>
@@ -34,4 +34,3 @@ const SidebarDropdownLink = ({title,items,icon:Icon}) => {
   )
 }
 
-export default SidebarDropdownLink

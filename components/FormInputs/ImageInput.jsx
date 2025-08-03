@@ -3,13 +3,13 @@ import { Pencil } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react'
 
-const ImageInput = ({ 
+export default function ImageInput ({ 
     label,
     imageUrl="",
     setImageUrl,
     endpoint="imageUploader",
     className = "col-span-full"
-}) => {
+}) {
   return (
     <div className={className}>
             <div className="flex justify-between items-center mb-4">
@@ -56,5 +56,3 @@ const ImageInput = ({
           </div>
   )
 }
-
-export default ImageInput

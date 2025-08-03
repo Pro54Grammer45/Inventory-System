@@ -6,35 +6,39 @@ import SubscriptionCard from './SubscriptionCard'
 import CollapsibleLink from './CollapsibleLink'
 import SidebarDropdownLink from './SidebarDropdownLink'
 
-const Sidebar = () => {
+export default function Sidebar () {
     const inventoryLinks =[
         {
-            title: 'Items',
+            title: 'All',
             href: '/inventory-dashboard/inventory',
+        },
+        {
+            title: 'Items',
+            href: '/inventory-dashboard/inventory/items',
         },
         {
             title: 'Categories',
-            href: '/inventory-dashboard/inventory',
+            href: '/inventory-dashboard/inventory/categories',
         },
         {
             title: 'Brands',
-            href: '/inventory-dashboard/inventory',
+            href: '/inventory-dashboard/inventory/brands',
         },
         {
             title: 'Units',
-            href: '/inventory-dashboard/inventory',
+            href: '/inventory-dashboard/inventory/units',
         },
         {
             title: 'Warehouse',
-            href: '/inventory-dashboard/inventory',
+            href: '/inventory-dashboard/inventory/warehouse',
         },
         {
             title: 'Inventory Adjustments',
-            href: '/inventory-dashboard/inventory',
+            href: '/inventory-dashboard/inventory/adjustments',
         },
         {
             title: 'Supplier',
-            href: '/inventory-dashboard/inventory',
+            href: '/inventory-dashboard/inventory/supplier',
         }
     ]
 
@@ -78,7 +82,7 @@ const Sidebar = () => {
     ]
 
   return (
-    <div className='w-60 min-h-screen bg-slate-800 text-slate-50 justify-between fixed'>
+    <div className='w-60 min-h-screen bg-slate-800 text-slate-50 justify-between fixed hidden sm:block'>
         {/* Top Part */}
         <div className="flex flex-col">
             {/* Logo */}
@@ -137,4 +141,3 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar

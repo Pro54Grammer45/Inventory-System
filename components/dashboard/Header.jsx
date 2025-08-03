@@ -1,22 +1,25 @@
-import { Bell, ChevronDown, History, LayoutGrid, Plus, Settings, Users } from 'lucide-react'
+import { AlignJustify, Bell, ChevronDown, History, LayoutGrid, Plus, Settings, Users } from 'lucide-react'
 import React from 'react'
 import Search from './Search'
 import Image from 'next/image'
 
-const Header = () => {
+export default function Header () {
   return (
     <div className='bg-gray-100 h-12 flex items-center justify-between px-8 border-b border-slate-200'>
       {/* Left Segment */}
+        <button className='sm:hidden'>
+          <AlignJustify className='w-6 h-6'/>
+        </button>      
         <div className="flex gap-3">
           {/* Recent activities */}
-          <button>
+          <button className='hidden sm:block'>
             <History className='w-6 h-6'/>
           </button>
           {/* Search */}
           <Search/>
         </div>
       {/* Right Segment */}
-        <div className="flex items-center gap-3">
+        <div className="items-center gap-3 hidden sm:flex">
           {/* Plus Icon */}
           <div className="pr-2 border-r border-gray-300">
             <button className='p-1 bg-blue-600 rounded-lg'>
@@ -41,7 +44,13 @@ const Header = () => {
               <ChevronDown className='w-4 h-4'/>
             </button>
             <button>
-              <Image alt='user image' width={96} height={96} className='rounded-full w-8 h-8 border border-slate-800' src='/user.jpg'/>
+              <Image 
+                alt='user image' 
+                width={96} 
+                height={96} 
+                className='rounded-full w-8 h-8 border border-slate-800' 
+                src='/user.jpg'
+              />
             </button>
             <button>
               <LayoutGrid className='w-6 h-6 text-slate-900'/>
@@ -49,8 +58,16 @@ const Header = () => {
           </div>
           {/*  */}
         </div>
+        <button className='sm:hidden'>
+          <Image 
+            alt='user image' 
+            width={96} 
+            height={96} 
+            className='rounded-full w-8 h-8 border border-slate-800' 
+            src='/user.jpg'
+          />
+          </button>
     </div>
   )
 }
 
-export default Header

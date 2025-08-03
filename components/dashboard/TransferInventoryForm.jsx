@@ -7,52 +7,8 @@ import { makePostRequest } from '@/lib/apiRequest'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-const TransferInventoryForm = () => {
-  const branches = [
-    {
-      label: "Branch A",
-      value: "masvcasdvcmba1112sasc"
-    },
-    {
-      label: "Branch B",
-      value: "vdhfvdshvchd112121sacasc"
-    },
-    {
-      label: "Branch C",
-      value: "asncbasb15212sacasc"
-    },
-    {
-      label: "Main A",
-      value: "asnkdsvnjasb15212sacasc"
-    },
-    {
-      label: "Main B",
-      value: "asncbajsdhdg776712sacasc"
-    },
-  ]
+export default function TransferInventoryForm ({ items, warehouses}) {
 
-  const items = [
-    {
-      label: "Item A",
-      value: "masvcasdvcmba1112sasc"
-    },
-    {
-      label: "Item B",
-      value: "vdhfvdshvchd112121sacasc"
-    },
-    {
-      label: "Item C",
-      value: "asncbasb15212sacasc"
-    },
-    {
-      label: "Item D",
-      value: "asnkdsvnjasb15212sacasc"
-    },
-    {
-      label: "Item E",
-      value: "asncbajsdhdg776712sacasc"
-    },
-  ]
 
   const {
     register,
@@ -81,7 +37,7 @@ const TransferInventoryForm = () => {
                 name='referenceNumber' 
                 register={register} 
                 errors={errors}
-                type='number'
+                type='string'
             />
             <SelectInput
                 label='Select the Item'
@@ -103,14 +59,14 @@ const TransferInventoryForm = () => {
                 name='givingWarehouseId'     
                 register={register}
                 className='w-full'
-                options={branches}
+                options={warehouses}
             />
             <SelectInput
                 label='Select the warehouse to receive the stock'
                 name='receivingWarehouseId'     
                 register={register}
                 className='w-full'
-                options={branches}
+                options={warehouses}
             />
             <TextareaInput
                 label='Adjustment Notes'
@@ -127,4 +83,3 @@ const TransferInventoryForm = () => {
   )
 }
 
-export default TransferInventoryForm

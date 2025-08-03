@@ -1,9 +1,8 @@
 import React from 'react'
 
-const Reports = () => {
+export default function Reports () {
   return (
     <div>Reports</div>
   )
 }
 
-export default Reports

@@ -1,9 +1,8 @@
 import React from 'react'
 
-const Documents = () => {
+export default function Documents  () {
   return (
     <div>Documents</div>
   )
 }
 
-export default Documents

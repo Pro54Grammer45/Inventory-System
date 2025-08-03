@@ -2,7 +2,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-const TextInput = ({
+export default function TextInput ({
   label,
   name,
   register,
@@ -11,7 +11,7 @@ const TextInput = ({
   isRequired=true,
   type="text",
   className="sm:col-span-2"
-}) => {
+}) {
   return (
     <div className={className}>
             <label
@@ -40,5 +40,3 @@ const TextInput = ({
           </div>
   )
 }
-
-export default TextInput

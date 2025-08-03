@@ -1,9 +1,9 @@
 import { SearchIcon } from 'lucide-react'
 import React from 'react'
 
-const Search = () => {
+export default function Search () {
   return (
-    <form action="">
+    <form className='hidden sm:block'>
         <label htmlFor="simple-search" className="sr-only">Search</label>
         <div className="relative w-full">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -20,4 +20,3 @@ const Search = () => {
   )
 }
 
-export default Search

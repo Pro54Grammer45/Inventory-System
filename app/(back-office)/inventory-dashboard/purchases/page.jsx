@@ -1,9 +1,8 @@
 import React from 'react'
 
-const Purchases = () => {
+export default function Purchases () {
   return (
     <div>Purchases</div>
   )
 }
 
-export default Purchases

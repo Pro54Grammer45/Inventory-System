@@ -1,9 +1,20 @@
-import React from 'react'
+import DataTable from '@/components/dashboard/DataTable'
+import FixedHeader from '@/components/dashboard/FixedHeader'
+import { getData } from '@/lib/getData'
 
-const Categories = () => {
+export default async function Categories  (){
+  const categories = await getData('categories')
+
+  const columns = ['name','description']
   return (
-    <div>Categories</div>
+    <div>
+      {/* Header */}
+      <FixedHeader title='Categories' newLink="/inventory-dashboard/inventory/categories/new"/>
+      {/* Table */}
+      <div className="my-4 p-8">
+        <DataTable data={categories} columns={columns}/>
+      </div>
+      
+    </div>
   )
 }
-
-export default Categories

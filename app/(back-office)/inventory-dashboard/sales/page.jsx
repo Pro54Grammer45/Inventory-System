@@ -1,9 +1,7 @@
 import React from 'react'
 
-const Sales = () => {
+export default function Sales () {
   return (
     <div>Sales</div>
   )
 }
-
-export default Sales

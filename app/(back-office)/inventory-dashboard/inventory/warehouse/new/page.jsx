@@ -9,15 +9,15 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
-const NewWarehouse = () => {
+export default function NewWarehouse () {
   const selectOptions = [
     {
-      label: "Main",
-      value: "main"
+      name: "Main",
+      id: "main"
     },
     {
-      label: "Branch",
-      value: "branch"
+      name: "Branch",
+      id:  "branch"
     },
 ]
 
@@ -40,7 +40,7 @@ const NewWarehouse = () => {
   return (
     <div>
       {/* Header */}
-      <FormHeader title='New Warehouse' href='/inventory-dashboard/inventory'/>
+      <FormHeader title='New Warehouse' href='/inventory-dashboard/inventory/warehouse'/>
       {/* Form */}
       <form 
         onSubmit={handleSubmit(onSubmit)}
@@ -83,4 +83,3 @@ const NewWarehouse = () => {
   )
 }
 
-export default NewWarehouse

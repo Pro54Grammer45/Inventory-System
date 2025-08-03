@@ -7,7 +7,7 @@ import { makePostRequest } from '@/lib/apiRequest'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-const NewSupplier = () => {
+export default function NewSupplier () {
   const {
     register,
     handleSubmit,
@@ -27,7 +27,7 @@ const NewSupplier = () => {
   return (
     <div>
       {/* Header */}
-      <FormHeader title='New Supplier' href='/inventory-dashboard/inventory'/>
+      <FormHeader title='New Supplier' href='/inventory-dashboard/inventory/supplier'/>
       {/* Form */}
       <form 
         onSubmit={handleSubmit(onSubmit)}
@@ -105,4 +105,3 @@ const NewSupplier = () => {
   )
 }
 
-export default NewSupplier

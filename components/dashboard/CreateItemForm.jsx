@@ -8,7 +8,7 @@ import { makePostRequest } from '@/lib/apiRequest'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-const CreateItemForm = ({ categories, units, brands, warehouses, suppliers}) => {
+export default function CreateItemForm ({ categories, units, brands, warehouses, suppliers}) {
   const [imageUrl, setImageUrl] = useState("")
 
   const {
@@ -173,5 +173,3 @@ const CreateItemForm = ({ categories, units, brands, warehouses, suppliers}) => 
       </form>
   )
 }
-
-export default CreateItemForm

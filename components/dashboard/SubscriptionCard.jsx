@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-const SubscriptionCard = () => {
+export default function SubscriptionCard () {
   return (
     <div className="px-1 py-1">
         <div className='p-3  bg-slate-900 rounded-lg'>
@@ -19,5 +19,3 @@ const SubscriptionCard = () => {
     </div>
   )
 }
-
-export default SubscriptionCard

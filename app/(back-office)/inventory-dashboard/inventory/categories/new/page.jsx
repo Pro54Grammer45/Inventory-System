@@ -8,7 +8,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
-const NewCategories = () => {
+export default function NewCategories () {
   const {
     register,
     handleSubmit,
@@ -28,7 +28,7 @@ const NewCategories = () => {
   return (
     <div>
       {/* Header */}
-      <FormHeader title='New Categories' href='/inventory-dashboard/inventory'/>
+      <FormHeader title='New Categories' href='/inventory-dashboard/inventory/categories'/>
       {/* Form */}
       <form 
         onSubmit={handleSubmit(onSubmit)}
@@ -57,4 +57,3 @@ const NewCategories = () => {
   )
 }
 
-export default NewCategories

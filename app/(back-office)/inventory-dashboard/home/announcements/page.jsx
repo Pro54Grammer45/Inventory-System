@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Announcements = () => {
+export default function Announcements ()  {
   return (
     <div>
         <h2>Announcements</h2>
@@ -8,4 +8,3 @@ const Announcements = () => {
   )
 }
 
-export default Announcements

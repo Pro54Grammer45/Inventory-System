@@ -2,10 +2,10 @@
 import { Plus } from 'lucide-react'
 import React from 'react'
 
-const SubmitButton = ({
+export default function SubmitButton ({
     isLoading,
     title,
-}) => {
+}) {
   return (
     <div className="sm:col-span-1">
           {isLoading ? (
@@ -46,4 +46,3 @@ const SubmitButton = ({
   )
 }
 
-export default SubmitButton

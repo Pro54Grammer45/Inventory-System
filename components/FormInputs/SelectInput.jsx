@@ -1,12 +1,12 @@
 import React from "react";
 
-const SelectInput = ({
+export default function SelectInput  ({
   label,
   name,
   register,
   className = "sm:col-span-2",
   options = [],
-}) => {
+})  {
   return (
     <div className={className}>
       <label
@@ -35,4 +35,3 @@ const SelectInput = ({
   )
 }
 
-export default SelectInput

@@ -2,7 +2,7 @@ import DashboardBanner from '@/components/dashboard/DashboardBanner'
 import SalesOverview from '@/components/dashboard/SalesOverview'
 import React from 'react'
 
-const Dashboard = () => {
+export default function Dashboard  () {
   return (
     <div>
       <DashboardBanner/>
@@ -11,4 +11,3 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard

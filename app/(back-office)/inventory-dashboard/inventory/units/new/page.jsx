@@ -8,7 +8,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
-const NewUnits = () => {
+export default function NewUnits  () {
   const {
     register,
     handleSubmit,
@@ -28,7 +28,7 @@ const NewUnits = () => {
   return (
     <div>
       {/* Header */}
-      <FormHeader title='New Units' href='/inventory-dashboard/inventory'/>
+      <FormHeader title='New Units' href='/inventory-dashboard/inventory/units'/>
       {/* Form */}
       <form 
         onSubmit={handleSubmit(onSubmit)}
@@ -60,4 +60,3 @@ const NewUnits = () => {
   )
 }
 
-export default NewUnits

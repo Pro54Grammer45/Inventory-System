@@ -5,7 +5,7 @@ import {  Diff, Factory, LayoutGrid, LayoutPanelTop,  Scale, Slack, Warehouse } 
 import Link from 'next/link'
 import React from 'react'
 
-const Inventory = () => {
+export default function Inventory () {
   const optionCards = [
     {
       title: 'Items',
@@ -68,7 +68,7 @@ const Inventory = () => {
 
   return (
     <div>
-      <FixedHeader newLink="/inventory-dashboard/inventory/items/new"/>
+      <FixedHeader title='Inventory' newLink="/inventory-dashboard/inventory/items/new"/>
       <div className="grid grid-col-1 lg:grid-cols-3 md:grid-cols-2 py-8 px-16 gap-6">
         {
           optionCards.map((card,i)=>{
@@ -81,5 +81,3 @@ const Inventory = () => {
     </div>
   )
 }
-
-export default Inventory

@@ -1,9 +1,8 @@
 import React from 'react'
 
-const Integrations = () => {
+export default function Integrations () {
   return (
     <div>Integrations</div>
   )
 }
 
-export default Integrations

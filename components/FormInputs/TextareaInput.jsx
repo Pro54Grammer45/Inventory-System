@@ -2,7 +2,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-const TextareaInput = ({
+export default function TextareaInput ({
   label,
   name,
   register,
@@ -10,7 +10,7 @@ const TextareaInput = ({
   isRequired=true,
   type="text",
   className="sm:col-span-2"
-}) => {
+}) {
   return (
     <div className={className}>
             <label
@@ -38,4 +38,3 @@ const TextareaInput = ({
   )
 }
 
-export default TextareaInput

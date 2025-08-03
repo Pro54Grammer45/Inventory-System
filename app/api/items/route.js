@@ -47,6 +47,10 @@ export async function GET(request) {
             orderBy: {
                 createdAt: 'desc' //Latest Warehouse
             },
+            include: {
+                category: true, //retuwn all categories fields
+                supplier: true, //retuwn all suppliers fields
+            }
         })
         return NextResponse.json(items)
     } catch (error) {

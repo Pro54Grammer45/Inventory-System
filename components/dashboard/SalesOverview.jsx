@@ -2,7 +2,7 @@ import React from 'react'
 import SalesActivityCard from './SalesActivityCard'
 import InventorySummaryCard from './InventorySummaryCard'
 
-const SalesOverview = () => {
+export default function SalesOverview () {
     const salesActivity = [
         {
             title: 'To be packed',
@@ -79,4 +79,3 @@ const SalesOverview = () => {
   )
 }
 
-export default SalesOverview

@@ -2,7 +2,7 @@ import { CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-const SalesActivityCard = ({item}) => {
+export default function SalesActivityCard ({item}) {
   return (
     <Link href={item.href}  className="shadow rounded-lg bg-white border border-slate-200 hover:border-blue-400 py-4 px-3 cursor-pointer flex items-center flex-col gap-3 transition-all duration-300">
         <h4 className={`font-semibold text-3xl ${item.color}`}>{item.number}</h4>
@@ -15,4 +15,3 @@ const SalesActivityCard = ({item}) => {
   )
 }
 
-export default SalesActivityCard
