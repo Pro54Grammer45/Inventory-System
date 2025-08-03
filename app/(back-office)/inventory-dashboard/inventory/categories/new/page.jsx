@@ -3,32 +3,44 @@ import FormHeader from '@/components/dashboard/FormHeader'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextareaInput from '@/components/FormInputs/TextareaInput'
 import TextInput from '@/components/FormInputs/TextInput'
-import { makePostRequest } from '@/lib/apiRequest'
+import { makePostRequest, makePutRequest } from '@/lib/apiRequest'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
-export default function NewCategories () {
+export default function NewCategories ({ initialData={}, isUpdate=false }) {
+  const router = useRouter()
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm()
+  } = useForm({
+    defaultValues: initialData,
+  })
 
   const [loading, setLoading] = useState(false)
-
+  function redirect(){
+    router.push('/inventory-dashboard/inventory/categories')
+  }
   async function onSubmit(data) {
     console.log(data)
-    const endpoint = 'api/categories'
-    const resourceName = 'Category'
-        
-    makePostRequest({setLoading,endpoint,data,resourceName,reset});
+    if(isUpdate){
+      //Update Request 
+      const endpoint = `api/categories/${initialData.id}`
+      const resourceName = 'Category'  
+      makePutRequest({setLoading,endpoint,data,resourceName,redirect});
+    }else{
+      const endpoint = 'api/categories'
+      const resourceName = 'Category'        
+      makePostRequest({setLoading,endpoint,data,resourceName,reset});
+    }
   }
   return (
     <div>
       {/* Header */}
-      <FormHeader title='New Categories' href='/inventory-dashboard/inventory/categories'/>
+      <FormHeader title={isUpdate ? 'Update Categories' : 'New Categories'} href='/inventory-dashboard/inventory/categories'/>
       {/* Form */}
       <form 
         onSubmit={handleSubmit(onSubmit)}
@@ -50,7 +62,7 @@ export default function NewCategories () {
         </div>
         {/* Submit Button */}
         <div className="sm:col-span-1">
-          <SubmitButton isLoading={loading} title='Category'/>
+          <SubmitButton isLoading={loading} title={isUpdate ? 'Update Categories' : 'New Categories'}/>
         </div>
       </form>
     </div>

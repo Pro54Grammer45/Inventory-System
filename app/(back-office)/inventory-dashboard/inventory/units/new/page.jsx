@@ -1,34 +1,46 @@
 "use client"
 import FormHeader from '@/components/dashboard/FormHeader'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
-import TextareaInput from '@/components/FormInputs/TextareaInput'
 import TextInput from '@/components/FormInputs/TextInput'
-import { makePostRequest } from '@/lib/apiRequest'
+import { makePostRequest, makePutRequest } from '@/lib/apiRequest'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
 
-export default function NewUnits  () {
+export default function NewUnits ({ initialData={}, isUpdate=false }) {
+  const router = useRouter()
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm()
+  } = useForm({
+    defaultValues: initialData,
+  })
 
   const [loading, setLoading] = useState(false)
 
+  function redirect(){
+    router.push('/inventory-dashboard/inventory/units')
+  }
+
   async function onSubmit(data) {
     console.log(data)
-    const endpoint = 'api/units'
-    const resourceName = 'Unit'
-        
-    makePostRequest({setLoading,endpoint,data,resourceName,reset});
+    if(isUpdate){
+      //Update Request 
+      const endpoint = `api/units/${initialData.id}`
+      const resourceName = 'Unit'  
+      makePutRequest({setLoading,endpoint,data,resourceName,redirect});
+    }else{
+      const endpoint = 'api/units'
+      const resourceName = 'Unit'        
+      makePostRequest({setLoading,endpoint,data,resourceName,reset});
+    }
   }
   return (
     <div>
       {/* Header */}
-      <FormHeader title='New Units' href='/inventory-dashboard/inventory/units'/>
+      <FormHeader title={isUpdate ? 'Update Unit' : 'New Unit'} href='/inventory-dashboard/inventory/units'/>
       {/* Form */}
       <form 
         onSubmit={handleSubmit(onSubmit)}
@@ -37,7 +49,7 @@ export default function NewUnits  () {
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput 
             label='Unit Name' 
-            name='title' 
+            name='name' 
             register={register} 
             errors={errors}
             className='w-full'
@@ -53,7 +65,7 @@ export default function NewUnits  () {
         </div>
         {/* Submit Button */}
         <div className="sm:col-span-1">
-          <SubmitButton isLoading={loading} title='Unit'/>
+          <SubmitButton isLoading={loading} title={isUpdate ? 'Update Unit' : 'New Unit'}/>
         </div>
       </form>
     </div>

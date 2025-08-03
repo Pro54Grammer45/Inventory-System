@@ -3,31 +3,45 @@ import FormHeader from '@/components/dashboard/FormHeader'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextareaInput from '@/components/FormInputs/TextareaInput'
 import TextInput from '@/components/FormInputs/TextInput'
-import { makePostRequest } from '@/lib/apiRequest'
+import { makePostRequest, makePutRequest } from '@/lib/apiRequest'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-export default function NewSupplier () {
+export default function NewSupplier ({ initialData={}, isUpdate=false }) {
+  const router = useRouter()
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm()
+  } = useForm({
+    defaultValues: initialData,
+  })
 
   const [loading, setLoading] = useState(false)
 
+   function redirect(){
+    router.push('/inventory-dashboard/inventory/supplier')
+  }
+
   async function onSubmit(data) {
     console.log(data)
-    const endpoint = 'api/supplier'
-    const resourceName = 'Supplier'
-    
-    makePostRequest({setLoading,endpoint,data,resourceName,reset});
+    if(isUpdate){
+      //Update Request 
+      const endpoint = `api/supplier/${initialData.id}`
+      const resourceName = 'Supplier'  
+      makePutRequest({setLoading,endpoint,data,resourceName,redirect});
+    }else{
+      const endpoint = 'api/supplier'
+      const resourceName = 'Supplier'        
+      makePostRequest({setLoading,endpoint,data,resourceName,reset});
+    }
   }
   return (
     <div>
       {/* Header */}
-      <FormHeader title='New Supplier' href='/inventory-dashboard/inventory/supplier'/>
+      <FormHeader title={isUpdate ? 'Update Supplier' : 'New Supplier'} href='/inventory-dashboard/inventory/supplier'/>
       {/* Form */}
       <form 
         onSubmit={handleSubmit(onSubmit)}
@@ -98,7 +112,7 @@ export default function NewSupplier () {
         </div>
         {/* Submit Button */}
         <div className="sm:col-span-1">
-          <SubmitButton isLoading={loading} title='Supplier'/>
+          <SubmitButton isLoading={loading} title={isUpdate ? 'Update Supplier' : 'New Supplier'}/>
         </div>
       </form>
     </div>

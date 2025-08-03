@@ -12,7 +12,7 @@ export default async function Supplier  (){
       <FixedHeader title='Suppliers' newLink="/inventory-dashboard/inventory/supplier/new"/>
       {/* Table */}
       <div className="my-4 p-8">
-        <DataTable data={suppliers} columns={columns}/>
+        <DataTable data={suppliers} columns={columns} resourceTitle='supplier'/>
       </div>
       
     </div>

@@ -3,23 +3,24 @@ import React from 'react'
 import Search from './Search'
 import Image from 'next/image'
 
-export default function Header () {
+export default function Header ({ setShowSidebar }) {
+
   return (
     <div className='bg-gray-100 h-12 flex items-center justify-between px-8 border-b border-slate-200'>
       {/* Left Segment */}
-        <button className='sm:hidden'>
+        <button onClick={()=>setShowSidebar(true)} className='lg:hidden'>
           <AlignJustify className='w-6 h-6'/>
         </button>      
         <div className="flex gap-3">
           {/* Recent activities */}
-          <button className='hidden sm:block'>
+          <button className='hidden lg:block'>
             <History className='w-6 h-6'/>
           </button>
           {/* Search */}
           <Search/>
         </div>
       {/* Right Segment */}
-        <div className="items-center gap-3 hidden sm:flex">
+        <div className="items-center gap-3 hidden lg:flex">
           {/* Plus Icon */}
           <div className="pr-2 border-r border-gray-300">
             <button className='p-1 bg-blue-600 rounded-lg'>
@@ -58,7 +59,7 @@ export default function Header () {
           </div>
           {/*  */}
         </div>
-        <button className='sm:hidden'>
+        <button className='lg:hidden'>
           <Image 
             alt='user image' 
             width={96} 

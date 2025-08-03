@@ -1,34 +1,47 @@
 "use client"
 import FormHeader from '@/components/dashboard/FormHeader'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
-import TextareaInput from '@/components/FormInputs/TextareaInput'
 import TextInput from '@/components/FormInputs/TextInput'
-import { makePostRequest } from '@/lib/apiRequest'
+import { makePostRequest, makePutRequest } from '@/lib/apiRequest'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
 
-export default function NewBrand  () {
+
+export default function NewBrand  ({ initialData={}, isUpdate=false }) {
+  const router = useRouter()
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm()
+  } = useForm({
+    defaultValues: initialData,
+  })
 
   const [loading, setLoading] = useState(false)
 
+  function redirect(){
+    router.push('/inventory-dashboard/inventory/brands')
+  }
+
   async function onSubmit(data) {
     console.log(data)
-    const endpoint = 'api/brands'
-    const resourceName = 'Brand'
-        
-    makePostRequest({setLoading,endpoint,data,resourceName,reset});
+    if(isUpdate){
+      //Update Request 
+      const endpoint = `api/brands/${initialData.id}`
+      const resourceName = 'Brand'  
+      makePutRequest({setLoading,endpoint,data,resourceName,redirect});
+    }else{
+      const endpoint = 'api/brands'
+      const resourceName = 'Brand'        
+      makePostRequest({setLoading,endpoint,data,resourceName,reset});
+    }
   }
   return (
     <div>
       {/* Header */}
-      <FormHeader title='New Brand' href='/inventory-dashboard/inventory/brands'/>
+      <FormHeader title={isUpdate ? 'Update Brand' : 'New Brand'} href='/inventory-dashboard/inventory/brands'/>
       {/* Form */}
       <form 
         onSubmit={handleSubmit(onSubmit)}
@@ -37,7 +50,7 @@ export default function NewBrand  () {
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput 
             label='Brand Name' 
-            name='title' 
+            name='name' 
             register={register} 
             errors={errors}
             className='w-full'
@@ -45,7 +58,7 @@ export default function NewBrand  () {
         </div>
         {/* Submit Button */}
         <div className="sm:col-span-1">
-          <SubmitButton isLoading={loading} title='Brand'/>
+          <SubmitButton isLoading={loading} title={isUpdate ? 'Updated Brand' : 'New Brand'}/>
         </div>
       </form>
     </div>

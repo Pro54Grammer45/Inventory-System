@@ -3,11 +3,11 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
     try {
-        const { title } = await request.json();
+        const { name } = await request.json();
 
         const brand = await db.brand.create({
             data: { 
-                name: title,
+                name,
             }
         });
         console.log(brand);
