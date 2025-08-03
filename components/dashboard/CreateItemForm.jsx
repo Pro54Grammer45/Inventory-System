@@ -4,11 +4,13 @@ import SelectInput from '@/components/FormInputs/SelectInput'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextareaInput from '@/components/FormInputs/TextareaInput'
 import TextInput from '@/components/FormInputs/TextInput'
-import { makePostRequest } from '@/lib/apiRequest'
+import { makePostRequest, makePutRequest } from '@/lib/apiRequest'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-export default function CreateItemForm ({ categories, units, brands, warehouses, suppliers}) {
+export default function CreateItemForm ({ categories, units, brands, warehouses, suppliers, initialData={}, isUpdate=false}) {
+  const router = useRouter()
   const [imageUrl, setImageUrl] = useState("")
 
   const {
@@ -16,18 +18,29 @@ export default function CreateItemForm ({ categories, units, brands, warehouses,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm()
+  } = useForm({
+    defaultValues: initialData,
+  })
 
   const [loading, setLoading] = useState(false)
+  function redirect(){
+    router.push('/inventory-dashboard/inventory/items')
+  }
+
 
   async function onSubmit(data) {
     data.imageUrl = imageUrl
     console.log(data)
-    const endpoint = 'api/items'
-    const resourceName = 'Item'
-        
-    makePostRequest({setLoading,endpoint,data,resourceName,reset});
-    setImageUrl('')
+    if(isUpdate){
+      //Update Request 
+      const endpoint = `api/items/${initialData.id}`
+      const resourceName = 'Item'  
+      makePutRequest({setLoading,endpoint,data,resourceName,redirect});
+    }else{
+      const endpoint = 'api/items'
+      const resourceName = 'Item'        
+      makePostRequest({setLoading,endpoint,data,resourceName,reset});
+    }
   }
   return (
     <form 
@@ -65,7 +78,7 @@ export default function CreateItemForm ({ categories, units, brands, warehouses,
           />
           <TextInput 
             label='Item Quantity' 
-            name='qty' 
+            name='quantity' 
             register={register} 
             errors={errors}
             className='w-full'
@@ -168,7 +181,7 @@ export default function CreateItemForm ({ categories, units, brands, warehouses,
         </div>
         {/* Submit Button */}
         <div className="sm:col-span-1">
-          <SubmitButton isLoading={loading} title='Item'/>
+          <SubmitButton isLoading={loading} title={isUpdate ? 'Update Item' : 'New Item'}/>
         </div>
       </form>
   )

@@ -36,7 +36,7 @@ export async function PUT(request,{params:{id}}) {
             categoryId: itemData.categoryId, 
             sku: itemData.sku, 
             barcode: itemData.barcode, 
-            quantity: parseInt(itemData.qty), 
+            quantity: parseInt(itemData.quantity), 
             unitId: itemData.unitId, 
             brandId: itemData.brandId, 
             sellingPrice: parseFloat(itemData.sellingPrice), 

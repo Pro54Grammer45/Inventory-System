@@ -3,7 +3,8 @@ import FormHeader from '@/components/dashboard/FormHeader'
 import { getData } from '@/lib/getData'
 import React from 'react'
 
-export default async function NewItem () {
+export default async function NewItem ({ initialData={}, isUpdate=false }) {
+  
   // Sequential Fetching => Causes Waterfall
   // const categories = await getData('categories')
   // const units = await getData('units');
@@ -11,7 +12,7 @@ export default async function NewItem () {
   // const warehouses = await getData('warehouse');
   // const suppliers = await getData('supplier');
 
-   const categoriesData =  getData('categories')
+  const categoriesData =  getData('categories')
   const unitsData =  getData('units');
   const brandsData =  getData('brands');
   const warehousesData =  getData('warehouse');
@@ -30,7 +31,7 @@ export default async function NewItem () {
   return (
     <div>
       {/* Header */}
-      <FormHeader title='New Item' href='/inventory-dashboard/inventory/items'/>
+      <FormHeader title={isUpdate ? 'Update Item' : 'New Item'} href='/inventory-dashboard/inventory/items'/>
       {/* Form */}
       <CreateItemForm
         categories={categories}
@@ -38,6 +39,8 @@ export default async function NewItem () {
         brands={brands}
         warehouses={warehouses}
         suppliers={suppliers}
+        initialData={''}
+        isUpdate={false}
       />
     </div>
   )
