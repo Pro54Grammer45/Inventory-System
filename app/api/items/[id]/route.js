@@ -6,6 +6,9 @@ export async function GET(request,{params:{id}}) {
             where: {
                 id
             },
+            include:{
+                warehouse: true,
+            }
         })
         return NextResponse.json(item)
     } catch (error) {

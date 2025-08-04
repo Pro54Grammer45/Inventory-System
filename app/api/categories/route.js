@@ -45,3 +45,27 @@ export async function GET(request) {
         })
     }
 }
+
+export async function DELETE(request) {
+    try {
+        const id = request.nextUrl.searchParams.get('id')
+        
+
+        const deletedCategory = await db.category.delete({
+            where: {
+                id,
+            }
+        })
+        console.log('Deleted category is ',deletedCategory);
+        return NextResponse.json(deletedCategory)
+    } catch (error) {
+        console.log(error);
+        
+        return NextResponse.json({
+            error,
+            message: "Failed to delete category"
+        },{
+            status: 500
+        })        
+    }
+}

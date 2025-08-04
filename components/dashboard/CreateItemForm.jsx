@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form'
 
 export default function CreateItemForm ({ categories, units, brands, warehouses, suppliers, initialData={}, isUpdate=false}) {
   const router = useRouter()
-  const [imageUrl, setImageUrl] = useState("")
+  const [imageUrl, setImageUrl] = useState(initialData.imageUrl)
 
   const {
     register,

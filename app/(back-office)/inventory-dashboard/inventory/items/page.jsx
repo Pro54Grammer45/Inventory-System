@@ -5,7 +5,7 @@ import { getData } from '@/lib/getData'
 export default async function Items  (){
   const items = await getData('items')
 
-  const columns = ['name','sku','quantity','sellingPrice']
+  const columns = ['imageUrl','name','category.name','quantity','supplier.name']
   return (
     <div>
       {/* Header */}

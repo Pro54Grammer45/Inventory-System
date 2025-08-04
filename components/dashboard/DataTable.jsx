@@ -1,6 +1,7 @@
-import { Pencil, Trash2 } from 'lucide-react'
+import { Pencil} from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
+import DeleteBtn from './DeleteBtn'
 
 export default function DataTable({ data=[], columns=[], resourceTitle=''}) {
   return (
@@ -27,7 +28,7 @@ export default function DataTable({ data=[], columns=[], resourceTitle=''}) {
                     data.map((item,i)=>{
                         return(
                             <tr key={i} className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 '>
-                                {
+                                {/* {
                                     columns.map((columnName,i)=>{
                                         return(
                                             <td key={i} className='px-6 py-4'>
@@ -35,6 +36,28 @@ export default function DataTable({ data=[], columns=[], resourceTitle=''}) {
                                             </td>
                                         )
                                     })
+                                } */}
+                                {
+                                    columns.map((columnName,i)=>(
+                                        <td key={i} className='px-6 py-4'>
+                                            {
+                                                columnName.includes(".") ? (
+                                                    columnName.split(".").reduce((obj,key) => obj[key],item)
+                                                ) : columnName === "createdAt" ||
+                                                columnName === "updatedAt" ? (
+                                                    new Date(item[columnName]).toLocaleDateString()
+                                                ) : columnName === 'imageUrl' ? (
+                                                    <img 
+                                                        src={item[columnName]} 
+                                                        alt={`Image is for ${resourceTitle}`}
+                                                        className='w-10 h-10 object-cover rounded-full' 
+                                                    />
+                                                ) : (
+                                                    item[columnName]
+                                                )
+                                            }
+                                        </td>
+                                    ))
                                 }
                                 <td className='px-6 py-4 text-right flex items-center space-x-4'>
                                     <Link 
@@ -44,10 +67,7 @@ export default function DataTable({ data=[], columns=[], resourceTitle=''}) {
                                         <Pencil className='w-4 h-4'/>
                                         <span>Edit</span>
                                     </Link>
-                                    <button className='font-medium text-red-600 dark:text-red-500 flex items-center space-x-1'>
-                                        <Trash2 className='w-4 h-4'/>
-                                        <span>Delete</span>
-                                    </button>
+                                    <DeleteBtn id={item.id} endpoint={resourceTitle}/>
                                 </td>
                             </tr>
                         )
